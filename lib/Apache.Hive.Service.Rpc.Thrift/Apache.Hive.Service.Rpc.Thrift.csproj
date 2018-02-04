@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Thrift\**" />
+    <EmbeddedResource Remove="Thrift\**" />
+    <None Remove="Thrift\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Thrift\Thrift.csproj" />
+  </ItemGroup>
+
+</Project>
