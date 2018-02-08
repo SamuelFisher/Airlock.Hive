@@ -1,6 +1,8 @@
 Airlock.Hive
 ============
 
+[![Build Status](https://travis-ci.org/SamuelFisher/Airlock.Hive.svg?branch=master)](https://travis-ci.org/SamuelFisher/Airlock.Hive)
+
 _Warning: this project is not yet feature complete and you are likely to
 encounter bugs and missing features. Please raise an issue or pull request
 for any bugs you encounter._

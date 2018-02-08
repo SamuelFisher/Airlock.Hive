@@ -28,7 +28,9 @@ namespace Airlock.Hive.Database.FunctionalTest
         [OneTimeSetUp]
         public void FixtureSetup()
         {
-            connection = new HiveConnection(TestContext.Parameters["ConnectionString"]);
+            var connectionString = TestContext.Parameters["ConnectionString"] ??
+                                   Environment.GetEnvironmentVariable("TEST_HIVE_CONNECTION_STRING");
+            connection = new HiveConnection(connectionString);
         }
 
         [OneTimeTearDown]

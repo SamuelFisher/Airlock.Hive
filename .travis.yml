@@ -1,0 +1,26 @@
+language: csharp
+dist: trusty
+sudo: required
+dotnet: 2.0.0
+mono: none
+
+services:
+  - docker
+
+env:
+  - TEST_HIVE_CONNECTION_STRING="hive2://127.0.0.1:10000?username=anonymous&password=anonymous"
+
+solution: Airlock.Hive.sln
+
+script:
+  - dotnet restore Airlock.Hive.sln
+  - dotnet build Airlock.Hive.sln
+  - dotnet test test/Airlock.Hive.Database.Test --no-build
+  - git clone https://github.com/big-data-europe/docker-hive.git
+  - pushd docker-hive
+  - docker-compose up -d
+  - popd
+  - sleep 60s
+  - dotnet test test/Airlock.Hive.Database.FunctionalTest --no-build
+  - pushd docker-hive
+  - docker-compose down
