@@ -74,6 +74,7 @@ namespace Airlock.Hive.ThriftClient
             };
             var closeSessionResp = client.CloseSessionAsync(closeSessionReq, CancellationToken.None).Result;
             closeSessionResp.Status.ThrowIfError();
+            session = null;
         }
 
         public HiveThriftStatementExecutor CreateStatementExecutor()

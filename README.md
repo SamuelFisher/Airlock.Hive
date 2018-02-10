@@ -76,3 +76,16 @@ with the Hortonworks Hive ODBC driver on Windows.
 
 To use an ODBC driver with Entity Framework, supply an ODBC connection string
 instead of a `hive2://...` connection string.
+
+## Functional Tests
+
+The functional tests require a running instance of Hive server. Assuming you
+have this listening on `127.0.0.1:10000`:
+
+```bash
+export TEST_HIVE_CONNECTION_STRING="hive2://127.0.0.1:10000?username=anonymous&password=anonymous"
+export TEST_EF_HIVE_CONNECTION_STRING="hive2://127.0.0.1:10000/ef_test?username=anonymous&password=anonymous"
+
+dotnet test test/Airlock.Hive.Database.FunctionalTest
+dotnet test test/Airlock.EntityFrameworkCore.Hive.FunctionalTest
+```

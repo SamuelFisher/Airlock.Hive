@@ -24,7 +24,9 @@ namespace Airlock.Hive.Database
     public class HiveConnection : DbConnection, IDbConnection
     {
         private readonly string connectionString;
-        private readonly HiveThriftConnection thriftConnection;
+        private readonly ThriftConnectionFactory thriftConnectionFactory;
+
+        private HiveThriftConnection thriftConnection;
 
         private string database;
 
@@ -55,7 +57,7 @@ namespace Airlock.Hive.Database
             this.connectionString = connectionString;
             database = cs.Database;
             DataSource = cs.Host;
-            thriftConnection = new HiveThriftConnection(new SaslConnectionFactory(cs.Host, cs.Port, cs.UserName, cs.Password));
+            thriftConnectionFactory = new SaslConnectionFactory(cs.Host, cs.Port, cs.UserName, cs.Password);
         }
 
         public HiveConnection(string host, int port, string username, string password)
@@ -88,7 +90,11 @@ namespace Airlock.Hive.Database
 
         public override void Open()
         {
+            if (thriftConnection != null)
+                throw new InvalidOperationException("Connection is already open.");
+
             state = ConnectionState.Connecting;
+            thriftConnection = new HiveThriftConnection(thriftConnectionFactory);
             thriftConnection.Open();
 
             if (!string.IsNullOrEmpty(Database))
@@ -102,6 +108,8 @@ namespace Airlock.Hive.Database
         public override void Close()
         {
             thriftConnection.Close();
+            thriftConnection.Dispose();
+            thriftConnection = null;
             state = ConnectionState.Closed;
         }
 

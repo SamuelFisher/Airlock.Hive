@@ -8,7 +8,9 @@ services:
   - docker
 
 env:
-  - TEST_HIVE_CONNECTION_STRING="hive2://127.0.0.1:10000?username=anonymous&password=anonymous"
+  - >
+    TEST_HIVE_CONNECTION_STRING="hive2://127.0.0.1:10000?username=anonymous&password=anonymous"
+    TEST_EF_HIVE_CONNECTION_STRING="hive2://127.0.0.1:10000/ef_test?username=anonymous&password=anonymous"
 
 solution: Airlock.Hive.sln
 
@@ -22,5 +24,6 @@ script:
   - popd
   - sleep 60s
   - dotnet test test/Airlock.Hive.Database.FunctionalTest --no-build
+  - dotnet test test/Airlock.EntityFrameworkCore.Hive.FunctionalTest --no-build
   - pushd docker-hive
   - docker-compose down

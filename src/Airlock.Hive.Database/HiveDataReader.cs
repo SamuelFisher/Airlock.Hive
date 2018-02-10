@@ -107,13 +107,13 @@ namespace Airlock.Hive.Database
         /// <inheritdoc />
         public override decimal GetDecimal(int i)
         {
-            throw new NotSupportedException();
+            return Convert.ToDecimal(GetValue(i));
         }
 
         /// <inheritdoc />
         public override double GetDouble(int i)
         {
-            return results[i].DoubleValue(rowIndex);
+            return Convert.ToDouble(GetValue(i));
         }
 
         public override IEnumerator GetEnumerator()
@@ -145,19 +145,19 @@ namespace Airlock.Hive.Database
         /// <inheritdoc />
         public override short GetInt16(int i)
         {
-            return results[i].ShortValue(rowIndex);
+            return Convert.ToInt16(GetValue(i));
         }
 
         /// <inheritdoc />
         public override int GetInt32(int i)
         {
-            return results[i].IntValue(rowIndex);
+            return Convert.ToInt32(GetValue(i));
         }
 
         /// <inheritdoc />
         public override long GetInt64(int i)
         {
-            return results[i].LongValue(rowIndex);
+            return Convert.ToInt64(GetValue(i));
         }
 
         /// <inheritdoc />
@@ -258,10 +258,5 @@ namespace Airlock.Hive.Database
             isClosed = true;
             statementExecutor.Dispose();
         }
-
-        //public void Dispose()
-        //{
-        //    Dispose(true);
-        //}
     }
 }

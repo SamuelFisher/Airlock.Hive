@@ -27,6 +27,12 @@ namespace Airlock.EntityFrameworkCore.Hive.FunctionalTest
     [TestFixture(Category = "Functional")]
     public class EntityFrameworkTest
     {
+        private static readonly string ConnectionString = TestContext.Parameters["ConnectionString"] ??
+                                                          Environment.GetEnvironmentVariable("TEST_HIVE_CONNECTION_STRING");
+
+        private static readonly string EFConnectionString = TestContext.Parameters["EFConnectionString"] ??
+                                                            Environment.GetEnvironmentVariable("TEST_EF_HIVE_CONNECTION_STRING");
+
         private FunctionalTestContext context;
 
         [OneTimeSetUp]
@@ -34,7 +40,8 @@ namespace Airlock.EntityFrameworkCore.Hive.FunctionalTest
         {
             Seed();
 
-            var options = new DbContextOptionsBuilder<FunctionalTestContext>().UseHive(TestContext.Parameters["EFConnectionString"]).Options;
+
+            var options = new DbContextOptionsBuilder<FunctionalTestContext>().UseHive(EFConnectionString).Options;
             context = new FunctionalTestContext(options);
         }
 
@@ -43,7 +50,7 @@ namespace Airlock.EntityFrameworkCore.Hive.FunctionalTest
         {
             context.Dispose();
 
-            using (var connection = new HiveConnection(TestContext.Parameters["ConnectionString"]))
+            using (var connection = new HiveConnection(ConnectionString))
             {
                 connection.Open();
 
@@ -57,9 +64,8 @@ namespace Airlock.EntityFrameworkCore.Hive.FunctionalTest
         [Test, Order(1)]
         public void Count()
         {
-            // TODO: server returns a LONG but this expects an INT
-            //var count = context.TestEntities.Count();
-            //Assert.That(count, Is.EqualTo(1));
+            var count = context.TestEntities.Count();
+            Assert.That(count, Is.EqualTo(1));
         }
 
         [Test, Order(2)]
@@ -79,7 +85,7 @@ namespace Airlock.EntityFrameworkCore.Hive.FunctionalTest
 
         private void Seed()
         {
-            using (var connection = new HiveConnection(TestContext.Parameters["ConnectionString"]))
+            using (var connection = new HiveConnection(ConnectionString))
             {
                 connection.Open();
 

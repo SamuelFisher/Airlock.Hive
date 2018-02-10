@@ -30,6 +30,7 @@ namespace Airlock.Hive.Database.FunctionalTest
             var connectionString = TestContext.Parameters["ConnectionString"] ??
                                    Environment.GetEnvironmentVariable("TEST_HIVE_CONNECTION_STRING");
             connection = new HiveConnection(connectionString);
+            connection.Open();
         }
 
         [OneTimeTearDown]
