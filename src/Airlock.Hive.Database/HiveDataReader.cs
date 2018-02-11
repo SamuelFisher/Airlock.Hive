@@ -131,7 +131,7 @@ namespace Airlock.Hive.Database
         /// <inheritdoc />
         public override float GetFloat(int i)
         {
-            throw new NotSupportedException();
+            return Convert.ToSingle(i);
         }
 
         /// <summary>

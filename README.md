@@ -11,7 +11,7 @@ Airlock.Hive is a set of libraries for accessing Apache Hive from .NET.
 
 - `Airlock.Hive.Database` is a fully-managed ADO.NET provider for Apache Hive.
 It aims to provide the same set of features as the official Apache JDBC driver.
-- `Airlock.EntityFrameworkCore.Hive` is an Entity Framework Core 2.0 provider.
+- `Airlock.EntityFrameworkCore.Hive` is an Entity Framework Core 2.0 provider
 for Hive
 
 Supported platforms:

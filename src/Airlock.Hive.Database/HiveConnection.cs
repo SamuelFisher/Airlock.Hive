@@ -68,7 +68,7 @@ namespace Airlock.Hive.Database
 
         protected override DbTransaction BeginDbTransaction(IsolationLevel isolationLevel)
         {
-            throw new NotSupportedException();
+            throw new NotSupportedException("Transactions are not supported.");
         }
 
         IDbTransaction IDbConnection.BeginTransaction()

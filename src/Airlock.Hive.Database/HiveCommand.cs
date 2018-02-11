@@ -24,12 +24,14 @@ namespace Airlock.Hive.Database
     public class HiveCommand : DbCommand, IDbCommand
     {
         private readonly HiveThriftStatementExecutor statementExecutor;
+        private readonly HiveDbParameterCollection parameters;
 
         private int batchSize = 1000;
 
         internal HiveCommand(HiveThriftStatementExecutor statementExecutor)
         {
             this.statementExecutor = statementExecutor;
+            parameters = new HiveDbParameterCollection();
         }
 
         public override string CommandText { get; set; }
@@ -42,7 +44,7 @@ namespace Airlock.Hive.Database
 
         protected override DbConnection DbConnection { get; set; }
 
-        protected override DbParameterCollection DbParameterCollection { get; } = new HiveParameterCollection();
+        protected override DbParameterCollection DbParameterCollection => parameters;
 
         protected override DbTransaction DbTransaction { get; set; }
 
@@ -66,24 +68,24 @@ namespace Airlock.Hive.Database
 
         protected override DbParameter CreateDbParameter()
         {
-            throw new NotImplementedException();
+            return new HiveDbParameter();
         }
 
         public override int ExecuteNonQuery()
         {
-            statementExecutor.Execute(CommandText);
+            statementExecutor.Execute(PrepareStatement());
             return 0;
         }
 
         protected override DbDataReader ExecuteDbDataReader(CommandBehavior behavior)
         {
-            statementExecutor.Execute(CommandText);
+            statementExecutor.Execute(PrepareStatement());
             return new HiveDataReader(statementExecutor, BatchSize);
         }
 
         IDataReader IDbCommand.ExecuteReader()
         {
-            statementExecutor.Execute(CommandText);
+            statementExecutor.Execute(PrepareStatement());
             return new HiveDataReader(statementExecutor, BatchSize);
         }
 
@@ -101,8 +103,10 @@ namespace Airlock.Hive.Database
 
         public override void Prepare()
         {
-            throw new NotSupportedException();
+            // Do nothing
         }
+
+        private string PrepareStatement() => HivePreparedStatement.PrepareStatement(CommandText, parameters);
 
         protected override void Dispose(bool disposing)
         {

@@ -20,11 +20,17 @@ using System.Text;
 
 namespace Airlock.Hive.Database
 {
-    class HiveParameterCollection : DbParameterCollection
+    class HiveDbParameterCollection : DbParameterCollection
     {
+        private readonly IDictionary<string, HiveDbParameter> members = new Dictionary<string, HiveDbParameter>();
+        
         public override int Add(object value)
         {
-            throw new NotImplementedException();
+            if (!(value is HiveDbParameter parameter))
+                throw new ArgumentException($"Parameter must be a {nameof(HiveDbParameter)}.", nameof(parameter));
+
+            members.Add(parameter.ParameterName, parameter);
+            return 0;
         }
 
         public override void Clear()
@@ -103,7 +109,7 @@ namespace Airlock.Hive.Database
 
         protected override DbParameter GetParameter(string parameterName)
         {
-            throw new NotImplementedException();
+            return members[parameterName];
         }
 
         public override void AddRange(Array values)
