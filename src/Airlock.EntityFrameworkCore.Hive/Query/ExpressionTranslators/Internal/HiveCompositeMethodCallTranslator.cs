@@ -23,9 +23,15 @@ namespace Airlock.EntityFrameworkCore.Hive.Query.ExpressionTranslators.Internal
 {
     public class HiveCompositeMethodCallTranslator : RelationalCompositeMethodCallTranslator
     {
+        private static readonly IMethodCallTranslator[] HiveTranslators =
+        {
+            new HiveStartsWithTranslator(),
+        };
+
         public HiveCompositeMethodCallTranslator(RelationalCompositeMethodCallTranslatorDependencies dependencies)
             : base(dependencies)
         {
+            AddTranslators(HiveTranslators);
         }
     }
 }

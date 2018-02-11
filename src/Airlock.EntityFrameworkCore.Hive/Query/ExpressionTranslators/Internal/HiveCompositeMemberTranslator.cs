@@ -21,7 +21,8 @@ namespace Airlock.EntityFrameworkCore.Hive.Query.ExpressionTranslators.Internal
 {
     public class HiveCompositeMemberTranslator : RelationalCompositeMemberTranslator
     {
-        public HiveCompositeMemberTranslator(RelationalCompositeMemberTranslatorDependencies dependencies) : base(dependencies)
+        public HiveCompositeMemberTranslator(RelationalCompositeMemberTranslatorDependencies dependencies)
+            : base(dependencies)
         {
         }
     }
