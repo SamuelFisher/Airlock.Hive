@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using Airlock.Hive.ThriftClient.ThriftConnection;
 using Apache.Hive.Service.Rpc.Thrift;
 using Thrift.Protocols;
 using Thrift.Transports;

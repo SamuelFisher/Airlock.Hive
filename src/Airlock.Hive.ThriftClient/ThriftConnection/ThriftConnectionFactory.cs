@@ -14,13 +14,28 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using Thrift.Transports;
 
-namespace Airlock.Hive.ThriftClient
+namespace Airlock.Hive.ThriftClient.ThriftConnection
 {
     public abstract class ThriftConnectionFactory
     {
         internal abstract TClientTransport CreateTransport();
+
+        protected IPAddress ResolveHost(string hostname)
+        {
+            if (IPAddress.TryParse(hostname, out IPAddress address))
+                return address;
+
+            var addresses = Dns.GetHostEntry(hostname).AddressList;
+            var ipv4 = addresses.FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork);
+            if (ipv4 != null)
+                return ipv4;
+            return addresses.First();
+        }
     }
 }

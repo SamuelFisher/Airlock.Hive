@@ -18,6 +18,7 @@ using System.Data;
 using System.Data.Common;
 using System.Text;
 using Airlock.Hive.ThriftClient;
+using Airlock.Hive.ThriftClient.ThriftConnection;
 
 namespace Airlock.Hive.Database
 {

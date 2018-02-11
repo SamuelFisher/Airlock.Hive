@@ -21,7 +21,7 @@ using Airlock.Hive.ThriftClient.Sasl;
 using Thrift.Transports;
 using Thrift.Transports.Client;
 
-namespace Airlock.Hive.ThriftClient
+namespace Airlock.Hive.ThriftClient.ThriftConnection
 {
     public class SaslConnectionFactory : ThriftConnectionFactory
     {
@@ -46,7 +46,7 @@ namespace Airlock.Hive.ThriftClient
 
         internal override TClientTransport CreateTransport()
         {
-            var ipAddress = IPAddress.Parse(Host); // Dns.GetHostEntry(Host).AddressList.First();
+            var ipAddress = ResolveHost(Host);
             var socket = new TSocketClientTransport(ipAddress, Port);
             return new TSaslClientTransport(socket, Username, Password);
         }
