@@ -21,12 +21,11 @@ using Microsoft.EntityFrameworkCore.Query.ExpressionTranslators;
 
 namespace Airlock.EntityFrameworkCore.Hive.Query.ExpressionTranslators.Internal
 {
-    public class HiveCompositeMethodCallTranslator : ICompositeMethodCallTranslator
+    public class HiveCompositeMethodCallTranslator : RelationalCompositeMethodCallTranslator
     {
-        public Expression Translate(MethodCallExpression methodCallExpression, IModel model)
+        public HiveCompositeMethodCallTranslator(RelationalCompositeMethodCallTranslatorDependencies dependencies)
+            : base(dependencies)
         {
-            // TODO
-            return methodCallExpression.Object;
         }
     }
 }
