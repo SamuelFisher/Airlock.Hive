@@ -1,9 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <PackageId>airlock-hive-internal-thrift</PackageId>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Thrift</AssemblyName>
-    <PackageId>Thrift</PackageId>
+    <Description>This package is used by Airlock.Hive and is not intended to be referenced directly.</Description>
+    <Authors>The Apache Software Foundation</Authors>
+    <Copyright>The Apache Software Foundation (http://www.apache.org/)</Copyright>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>

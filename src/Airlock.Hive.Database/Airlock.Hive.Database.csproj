@@ -1,7 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <PackageId>Airlock.Hive.Database</PackageId>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageProjectUrl>https://github.com/SamuelFisher/Airlock.Hive</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/SamuelFisher/Airlock.Hive</RepositoryUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/SamuelFisher/Airlock.Hive/master/LICENSE</PackageLicenseUrl>
+    <Description>ADO.NET provider for Apache Hive.</Description>
+    <Authors>Samuel Fisher</Authors>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
 
   <ItemGroup>

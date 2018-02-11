@@ -1,7 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <PackageId>airlock-hive-internal-apache-hive-thrift</PackageId>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>This package is used by Airlock.Hive and is not intended to be referenced directly.</Description>
+    <Authors>The Apache Software Foundation</Authors>
+    <Copyright>The Apache Software Foundation (http://www.apache.org/)</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
