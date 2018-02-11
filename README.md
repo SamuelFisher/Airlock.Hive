@@ -2,6 +2,8 @@ Airlock.Hive
 ============
 
 [![Build Status](https://travis-ci.org/SamuelFisher/Airlock.Hive.svg?branch=master)](https://travis-ci.org/SamuelFisher/Airlock.Hive)
+[![NuGet](https://img.shields.io/nuget/v/Airlock.Hive.Database.svg)](https://www.nuget.org/packages/Airlock.Hive.Database)
+[![NuGet](https://img.shields.io/nuget/v/Airlock.EntityFrameworkCore.Hive.svg)](https://www.nuget.org/packages/Airlock.EntityFrameworkCore.Hive)
 
 _Warning: this project is not yet feature complete and you are likely to
 encounter bugs and missing features. Please raise an issue or pull request
@@ -22,6 +24,10 @@ Supported platforms:
 
 ### ADO.NET
 
+```
+> Install-Package Airlock.Hive.Database
+```
+
 ```csharp
 using (var connection = new HiveConnection("hive2://hive.example.com:10000?username=username&password=password"))
 {
@@ -40,6 +46,10 @@ using (var connection = new HiveConnection("hive2://hive.example.com:10000?usern
 ```
 
 ### Entity Framework
+
+```
+> Install-Package Airlock.EntityFrameworkCore.Hive
+```
 
 ```csharp
 var optionsBuilder = new DbContextOptionsBuilder<EstateAgentContext>()
